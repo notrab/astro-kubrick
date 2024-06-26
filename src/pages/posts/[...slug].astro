@@ -1,0 +1,35 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import BlogLayout from "../../layouts/BlogLayout.astro";
+
+export const sortByDate = (a, b) => {
+    return new Date(b.data.pubDate) - new Date(a.data.pubDate);
+};
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    const numberOfPosts = posts.length;
+
+    return posts.sort(sortByDate).map((post, i) => ({
+        params: { slug: post.slug },
+        props: {
+            ...post,
+            prevPost: i + 1 === numberOfPosts ? null : posts[i + 1],
+            nextPost: i === 0 ? null : posts[i - 1],
+        },
+    }));
+}
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<BlogLayout
+    title={post.data.title}
+    pubDate={post.data.pubDate}
+    prevPost={post.prevPost}
+    nextPost={post.nextPost}
+>
+    <Content />
+</BlogLayout>

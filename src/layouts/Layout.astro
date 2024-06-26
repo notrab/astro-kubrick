@@ -1,0 +1,26 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+
+    <body class="md:bg-[#E7E7E7] md:px-4 md:py-4 lg:py-8">
+        <div
+            class="md:rounded-lg md:border md:border-neutral-400 md:shadow md:bg-white max-w-4xl mx-auto"
+        >
+            <div class="p-4">
+                <Header />
+                <slot />
+            </div>
+            <Footer />
+        </div>
+    </body>
+</html>

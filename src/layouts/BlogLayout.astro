@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import Layout from "./Layout.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+
+type Props = CollectionEntry<"blog">["data"];
+
+const { title, pubDate, prevPost, nextPost } = Astro.props;
+---
+
+<Layout>
+    <div class="py-8 px-4 md:px-8">
+        <div class="max-w-lg mx-auto">
+            <div class="mb-8 text-sm flex items-center justify-between">
+                {
+                    prevPost && (
+                        <p class="inline-flex gap-1">
+                            <span class="text-boulder">&laquo;</span>
+                            <a
+                                href={`/posts/${prevPost.slug}/`}
+                                class="text-science-blue transition hover:text-chathams-blue hover:underline"
+                            >
+                                {prevPost.data.title}
+                            </a>
+                        </p>
+                    )
+                }
+                {
+                    nextPost && (
+                        <p class="inline-flex gap-1">
+                            <a
+                                href={`/posts/${nextPost.slug}/`}
+                                class="text-science-blue transition hover:text-chathams-blue hover:underline"
+                            >
+                                {nextPost.data.title}
+                            </a>
+                            <span class="text-boulder">&raquo;</span>
+                        </p>
+                    )
+                }
+            </div>
+
+            <div class="mb-4">
+                <h1 class="text-xl md:text-2xl font-semibold text-mine-shaft">
+                    {title}
+                </h1>
+                <p class="text-sm text-boulder">
+                    <FormattedDate date={pubDate} />
+                </p>
+            </div>
+            <div class="prose prose-sm max-w-none">
+                <slot />
+            </div>
+            <div class="pt-8">
+                <p class="text-boulder text-sm text-center">
+                    Posted in <a
+                        href="/category/general"
+                        class="text-science-blue transition hover:text-chathams-blue hover:underline"
+                        >General</a
+                    >
+                </p>
+            </div>
+        </div>
+    </div>
+</Layout>

@@ -1,0 +1,21 @@
+---
+const today = new Date();
+
+import { SITE_TITLE } from "../consts";
+---
+
+<footer
+    class="bg-gradient-to-t from-neutral-300 via-white to-white md:rounded-b-lg py-4 text-center"
+>
+    <p class="text-neutral-800 text-xs">
+        {SITE_TITLE} is powered by <a
+            href="https://astro.build"
+            class="text-science-blue transition hover:text-chathams-blue hover:underline"
+            >Astro</a
+        ><br /><a
+            href="https://astro.build"
+            class="text-science-blue transition hover:text-chathams-blue hover:underline"
+            >Entries (RSS)</a
+        >.
+    </p>
+</footer>
