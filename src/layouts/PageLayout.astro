@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import Sidebar from "../components/Sidebar.astro";
+import Layout from "./Layout.astro";
+
+type Props = CollectionEntry<"page">["data"];
+
+const { title } = Astro.props;
+---
+
+<Layout title={title}>
+    <div class="py-8 px-4 md:px-8">
+        <div class="grid gap-4 grid-cols-3">
+            <div class="col-span-2">
+                <div class="mb-4">
+                    <h1
+                        class="text-xl md:text-2xl font-semibold text-mine-shaft"
+                    >
+                        {title}
+                    </h1>
+                </div>
+                <div class="prose prose-sm max-w-none">
+                    <slot />
+                </div>
+            </div>
+
+            <Sidebar />
+        </div>
+    </div>
+</Layout>

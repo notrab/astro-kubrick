@@ -1,5 +1,7 @@
 ---
+import { getCollection } from "astro:content";
 
+const pages = await getCollection("page");
 ---
 
 <div class="space-y-8">
@@ -8,30 +10,26 @@
         <button type="submit" class="bg-neutral-200 px-1.5">Search</button>
     </div>
 
-    <div>
-        <h4 class="text-neutral-800 font-semibold mb-2">Pages</h4>
-
-        <ul class="text-sm pl-4">
-            <li>
-                &raquo; <a
-                    href="https://astro.build"
-                    class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >About</a>
-            </li>
-            <li>
-                &raquo; <a
-                    href="https://astro.build"
-                    class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >Uses</a>
-            </li>
-            <li>
-                &raquo; <a
-                    href="https://astro.build"
-                    class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >Work</a>
-            </li>
-        </ul>
-    </div>
+    {
+        pages && (
+            <div>
+                <h4 class="text-neutral-800 font-semibold mb-2">Pages</h4>
+                <ul class="text-sm pl-4">
+                    {pages.map((page) => (
+                        <li class="text-boulder">
+                            &raquo;{" "}
+                            <a
+                                href={`/${page.slug}/`}
+                                class="transition text-[#06C] hover:underline hover:text-[#147]"
+                            >
+                                {page.data.title}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
 
     <div>
         <h4 class="text-neutral-800 font-semibold mb-2">Archives</h4>
@@ -41,19 +39,22 @@
                 &raquo; <a
                     href="https://astro.build"
                     class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >June 2024</a>
+                    >June 2024</a
+                >
             </li>
             <li>
                 &raquo; <a
                     href="https://astro.build"
                     class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >May 2024</a>
+                    >May 2024</a
+                >
             </li>
             <li>
                 &raquo; <a
                     href="https://astro.build"
                     class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >April 2024</a>
+                    >April 2024</a
+                >
             </li>
         </ul>
     </div>
@@ -66,25 +67,29 @@
                 &raquo; <a
                     href="https://astro.build"
                     class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >astro</a>
+                    >astro</a
+                >
             </li>
             <li>
                 &raquo; <a
                     href="https://astro.build"
                     class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >typescript</a>
+                    >typescript</a
+                >
             </li>
             <li>
                 &raquo; <a
                     href="https://astro.build"
                     class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >personal</a>
+                    >personal</a
+                >
             </li>
             <li>
                 &raquo; <a
                     href="https://astro.build"
                     class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >random</a>
+                    >random</a
+                >
             </li>
         </ul>
     </div>
@@ -97,37 +102,43 @@
                 &raquo; <a
                     href="https://astro.build"
                     class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >Ronak Ganatra</a>
+                    >Ronak Ganatra</a
+                >
             </li>
             <li>
                 &raquo; <a
                     href="https://astro.build"
                     class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >Michael Bromley</a>
+                    >Michael Bromley</a
+                >
             </li>
             <li>
                 &raquo; <a
                     href="https://astro.build"
                     class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >Ben Holmes</a>
+                    >Ben Holmes</a
+                >
             </li>
             <li>
                 &raquo; <a
                     href="https://astro.build"
                     class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >Charly Poly</a>
+                    >Charly Poly</a
+                >
             </li>
             <li>
                 &raquo; <a
                     href="https://astro.build"
                     class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >James Perkins</a>
+                    >James Perkins</a
+                >
             </li>
             <li>
                 &raquo; <a
                     href="https://astro.build"
                     class="transition text-[#06C] hover:underline hover:text-[#147]"
-                    >Scott Spence</a>
+                    >Scott Spence</a
+                >
             </li>
         </ul>
     </div>

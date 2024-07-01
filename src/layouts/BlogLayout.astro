@@ -45,9 +45,13 @@ const { title, pubDate, prevPost, nextPost } = Astro.props;
                 <h1 class="text-xl md:text-2xl font-semibold text-mine-shaft">
                     {title}
                 </h1>
-                <p class="text-sm text-boulder">
-                    <FormattedDate date={pubDate} />
-                </p>
+                {
+                    pubDate && (
+                        <p class="text-sm text-boulder">
+                            <FormattedDate date={pubDate} />
+                        </p>
+                    )
+                }
             </div>
             <div class="prose prose-sm max-w-none">
                 <slot />
