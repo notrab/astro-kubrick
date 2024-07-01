@@ -2,7 +2,8 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import BlogLayout from "../../layouts/BlogLayout.astro";
 
-export const sortByDate = (a, b) => {
+export const sortByDate = (a: any, b: any) => {
+    // @ts-expect-error
     return new Date(b.data.pubDate) - new Date(a.data.pubDate);
 };
 
