@@ -11,26 +11,34 @@ export async function getStaticPaths() {
     const posts = await getCollection("blog");
     const numberOfPosts = posts.length;
 
-    return posts.sort(sortByDate).map((post, i) => ({
-        params: { slug: post.slug },
-        props: {
-            ...post,
-            prevPost: i + 1 === numberOfPosts ? null : posts[i + 1],
-            nextPost: i === 0 ? null : posts[i - 1],
-        },
-    }));
+    return posts.sort(sortByDate).map((post, i) => {
+        const prevPost = i + 1 === numberOfPosts ? null : posts[i + 1];
+        const nextPost = i === 0 ? null : posts[i - 1];
+
+        return {
+            params: { slug: post.slug },
+            props: {
+                ...post,
+                ...(prevPost && { prevPost }),
+                ...(nextPost && { nextPost }),
+            },
+        };
+    });
 }
+
 type Props = CollectionEntry<"blog">;
 
-const post = Astro.props;
+// @ts-expect-error
+const { prevPost, nextPost, ...post } = Astro.props;
 const { Content } = await post.render();
 ---
 
 <BlogLayout
     title={post.data.title}
+    description={post.data.description}
     pubDate={post.data.pubDate}
-    prevPost={post.prevPost}
-    nextPost={post.nextPost}
+    prevPost={prevPost}
+    nextPost={nextPost}
 >
     <Content />
 </BlogLayout>

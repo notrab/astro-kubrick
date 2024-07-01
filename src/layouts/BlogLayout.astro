@@ -9,10 +9,10 @@ type Props = CollectionEntry<"blog">["data"] & {
     nextPost?: CollectionEntry<"blog">;
 };
 
-const { title, pubDate, prevPost, nextPost } = Astro.props;
+const { title, description, pubDate, prevPost, nextPost } = Astro.props;
 ---
 
-<Layout>
+<Layout title={title} description={description}>
     <div class="py-8 px-4 md:px-8">
         <div class="max-w-lg mx-auto">
             <div class="mb-8 text-sm flex items-center justify-between">
